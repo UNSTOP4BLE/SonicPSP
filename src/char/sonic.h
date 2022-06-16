@@ -1,0 +1,1 @@
+void Char_Sonic(g2dTexture* Sonic);
