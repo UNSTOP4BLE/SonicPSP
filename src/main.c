@@ -51,7 +51,6 @@ int main()
       
 		Char_Sonic(Sonic);
 
-		g2dEnd();
        	g2dFlip(G2D_VSYNC);
 
        	

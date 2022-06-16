@@ -1,0 +1,6 @@
+
+EBOOT.PBP
+PARAM.SFO
+PSPGAME.elf
+src/animation.o
+*.o
