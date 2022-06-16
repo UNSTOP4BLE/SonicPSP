@@ -1,6 +1,5 @@
 
-EBOOT.PBP
-PARAM.SFO
-PSPGAME.elf
-src/animation.o
+*.PBP
+*.SFO
+*.elf
 *.o
