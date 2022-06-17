@@ -1,6 +1,6 @@
 #ifndef __WAV_H__
 #define __WAV_H__
-
+#include <stdbool.h>
 typedef struct
 {
         unsigned long channels; /**<  Number of channels */

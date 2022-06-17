@@ -6,18 +6,27 @@
 static int anim;
 static int animspeed;
 
-void InitAnim(g2dTexture* tex, AnimFrames Frames, int animx, int animy)
+void InitAnim(g2dTexture* tex, AnimFrames Frames, int animx, int animy, bool flipanim)
 {
     g2dBeginRects(tex);
 	g2dSetCropXY(Frames.x, Frames.y);
 	g2dSetCropWH(Frames.w, Frames.h);
-	g2dSetScaleWH(Frames.w, Frames.h);
-	g2dSetCoordXY(Frames.offsetx + animx, Frames.offsety + animy);
+	if (flipanim)
+	{
+		g2dSetScaleWH(-Frames.w, Frames.h);
+		g2dSetCoordXY(-Frames.offsetx + animx, Frames.offsety + animy);
+	}
+	else
+	{
+		g2dSetScaleWH(Frames.w, Frames.h);
+		g2dSetCoordXY(Frames.offsetx + animx, Frames.offsety + animy);
+	}
+
 	g2dAdd();
 	g2dEnd();
 }
 
-void PlayAnim(g2dTexture* tex, AnimFrames Frames[], int animx, int animy, int animcooldown, int lastframe, int backframe)
+void PlayAnim(g2dTexture* tex, AnimFrames Frames[], int animx, int animy, int animcooldown, int lastframe, int backframe, bool flipanim)
 {
 	if (anim > lastframe - 1) // we do -1 cus the frames are a array
 		anim = backframe;
@@ -29,7 +38,7 @@ void PlayAnim(g2dTexture* tex, AnimFrames Frames[], int animx, int animy, int an
 	}
 
 	
-    InitAnim(tex, Frames[anim], animx, animy);
+    InitAnim(tex, Frames[anim], animx, animy, flipanim);
 }
 
 

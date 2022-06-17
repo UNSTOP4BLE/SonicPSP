@@ -2,6 +2,7 @@
 #define	__PAD_H__
 
 #include <pspctrl.h>
+#include <stdbool.h>
 
 typedef struct Vec2
 {

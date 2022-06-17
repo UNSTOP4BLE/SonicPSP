@@ -3,11 +3,10 @@
 #include <pspdebug.h>
 #include <pspkernel.h>
 #include <psputility.h>
-#include "psp/glib2d.h"
-#include "psp/wav.h"
 #include "psp/pad.h"
-#include "animation.h"
-#include "char/sonic.h"
+#include "psp/wav.h"
+#include "psp/glib2d.h"
+#include "playstate.h"
 
 PSP_MODULE_INFO("PSP GAME", 0, 1, 0);
 
@@ -37,22 +36,11 @@ int main()
 	WavInit();
 	PadInit();
     pspDebugScreenInit();
-   	Wav *jump = WavLoad("assets/sfx/SCD_FM_02.wav"); 
-    g2dTexture* Sonic = g2dTexLoad("assets/sonicsheet.png",G2D_SWIZZLE);
+  	
+  	Playstate();
 
     while(1) 
     {
-    	PadUpdate();
-    	if (PadPressed(PSP_CTRL_CROSS))  
-        	WavPlay(jump);
        
-        g2dClear(GREEN);
-       
-      
-		Char_Sonic(Sonic);
-
-       	g2dFlip(G2D_VSYNC);
-
-       	
     }
 }
