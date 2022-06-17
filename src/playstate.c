@@ -16,8 +16,7 @@ void Playstate()
 
     while(1) 
     {
-    	PadUpdate();
-    	g2dClear(GREEN);
+       	g2dClear(GREEN);
 
     	if (PadPressed(PSP_CTRL_CROSS))  
         	WavPlay(jump);

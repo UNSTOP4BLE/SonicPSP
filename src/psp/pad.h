@@ -11,7 +11,7 @@ typedef struct Vec2
 
 extern bool 		PadInit		(void);
 extern void			PadShutdown	(void);
-extern void			PadUpdate		(void);
+extern void			PadUpdate	(void);
 extern bool		    PadAny		(void);
 extern bool	    	PadPressed	(const unsigned long Button);
 extern bool		    PadHeld		(const unsigned long Button);

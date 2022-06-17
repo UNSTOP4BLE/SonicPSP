@@ -37,10 +37,9 @@ int main()
 	PadInit();
     pspDebugScreenInit();
   	
-  	Playstate();
-
     while(1) 
     {
-       
+       PadUpdate();
+       Playstate();
     }
 }
