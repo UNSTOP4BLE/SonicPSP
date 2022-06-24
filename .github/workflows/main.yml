@@ -26,7 +26,7 @@ jobs:
     steps:
       - name: Install Dependencies
         run: |
-          apk add cmake gmp mpc1 mpfr4 make zip
+          apk add cmake gmp mpc1 mpfr4 make zip curl
   
       - name: Checkout
         uses: actions/checkout@v2
@@ -42,4 +42,4 @@ jobs:
           mv EBOOT.PBP export
           zip
           zip a export.zip export
-          curl --upload-file export.rar https://transfer.sh/
+          curl --upload-file export.zip https://transfer.sh/
