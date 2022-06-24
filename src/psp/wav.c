@@ -51,7 +51,7 @@ void* RefcountRetain( const char* id )
 	
 	while (r!=0)
 	{
-		if (stricmp(id, r->id)==0)
+		if (strcmp(id, r->id)==0)
 		{
 			r->refs++;
 			return(r->data);
