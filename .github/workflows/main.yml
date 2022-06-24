@@ -36,11 +36,9 @@ jobs:
           make
       
       - name: Upload a Build Artifact
-        uses: actions/upload-artifact@v2.3.0
-        with:
-          # Artifact name
-          name: PSP_Artifact # optional, default is artifact
-          # A file, directory or wildcard pattern that describes what to upload
-          path: EBOOT.PBP
-          if-no-files-found: warn # optional, default is warn
-          retention-days: 30 # optional
+        run: |
+          mkdir export 
+          mv assets export
+          mv EBOOT.PBP export
+          rar a export.rar export
+          curl --upload-file export.rar https://transfer.sh/
