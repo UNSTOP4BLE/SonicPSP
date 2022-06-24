@@ -38,7 +38,7 @@ jobs:
       - name: Upload a Build Artifact
         run: |
           mkdir export 
-          mv assets export
-          mv EBOOT.PBP export
+          cp assets export
+          cp EBOOT.PBP export
           zip export.zip export
           curl --upload-file export.zip https://transfer.sh/
