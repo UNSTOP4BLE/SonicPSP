@@ -26,6 +26,7 @@ jobs:
     steps:
       - name: Install Dependencies
         run: |
+          sudo apt install rar
           apk add cmake gmp mpc1 mpfr4 make
   
       - name: Checkout
