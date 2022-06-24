@@ -34,9 +34,6 @@ jobs:
       - name: Build
         run: |
           make
-      
-      - name: Upload a Build Artifact
-        run: |
           mkdir export 
           cp -R assets export
           cp EBOOT.PBP export
