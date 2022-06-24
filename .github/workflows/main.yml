@@ -26,8 +26,7 @@ jobs:
     steps:
       - name: Install Dependencies
         run: |
-          sudo apt install rar
-          apk add cmake gmp mpc1 mpfr4 make
+          apk add cmake gmp mpc1 mpfr4 make zip
   
       - name: Checkout
         uses: actions/checkout@v2
@@ -41,5 +40,6 @@ jobs:
           mkdir export 
           mv assets export
           mv EBOOT.PBP export
-          rar a export.rar export
+          zip
+          zip a export.zip export
           curl --upload-file export.rar https://transfer.sh/
