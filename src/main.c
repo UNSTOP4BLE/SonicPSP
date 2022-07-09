@@ -33,13 +33,10 @@ void setupcallbacks() {
 int main() 
 {
     setupcallbacks();
-	WavInit();
-	PadInit();
+	Wav_Init();
+	Pad_Init();
     pspDebugScreenInit();
   	
-    while(1) 
-    {
-       PadUpdate();
-       Playstate();
-    }
+    Playstate();
+    
 }

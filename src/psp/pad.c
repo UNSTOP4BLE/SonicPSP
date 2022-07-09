@@ -31,7 +31,7 @@ static void AddInput (const unsigned long Button)
 	}
 }
 
-bool PadInit (void)
+bool Pad_Init (void)
 {
 	memset (&Pad, 0, sizeof(Input));
 
@@ -42,7 +42,7 @@ bool PadInit (void)
 	return 1;
 }
 
-void PadUpdate (void)
+void Pad_Update (void)
 {
 	sceCtrlPeekBufferPositive (&Pad.Input, 1);
 
@@ -66,7 +66,7 @@ void PadUpdate (void)
 	AddInput (PSP_CTRL_SQUARE);
 }
 
-bool PadPressed (const unsigned long Button)
+bool Pad_Pressed (const unsigned long Button)
 {
 	if (((Pad.Pressed & Button) != 0))	// Pressed is TRUE
 	{
@@ -77,28 +77,9 @@ bool PadPressed (const unsigned long Button)
 	return 0;
 }
 
-bool PadHeld (const unsigned long Button)
+bool Pad_Held (const unsigned long Button)
 {
 	return	((Pad.Held & Button) != 0);
-}
-
-bool PadAny (void)
-{
-	if (PadPressed (PSP_CTRL_SELECT)	||
-		PadPressed (PSP_CTRL_START)	    ||
-		PadPressed (PSP_CTRL_UP)		||
-		PadPressed (PSP_CTRL_RIGHT)	    ||
-		PadPressed (PSP_CTRL_DOWN)		||
-		PadPressed (PSP_CTRL_LEFT)		||
-		PadPressed (PSP_CTRL_LTRIGGER)	||
-		PadPressed (PSP_CTRL_RTRIGGER)	||
-		PadPressed (PSP_CTRL_TRIANGLE)	||
-		PadPressed (PSP_CTRL_CIRCLE)	||
-		PadPressed (PSP_CTRL_CROSS)	    ||
-		PadPressed (PSP_CTRL_SQUARE))
-		return 1;
-
-	return 0;
 }
 
 Vec2f* PadGetStick (void)

@@ -44,22 +44,20 @@ static AnimFrames runstart[7] =
 
 void Char_Sonic(g2dTexture* Sonic)
 {
-	PadUpdate();
-	
 	//if sonic is facing right keep his animations normal
-	if (PadHeld(PSP_CTRL_RIGHT))	
+	if (Pad_Held(PSP_CTRL_RIGHT))	
 	{
 		PlayAnim(Sonic, runstart, 1, 1, 4, 6, 0, false, &anim, &animspeed);
 		sonicfacingright = true;
 	}
-	else if (sonicfacingright && !PadHeld(PSP_CTRL_RIGHT) && !PadHeld(PSP_CTRL_LEFT)) 
+	else if (sonicfacingright && !Pad_Held(PSP_CTRL_RIGHT) && !Pad_Held(PSP_CTRL_LEFT)) 
 		PlayAnim(Sonic, idle, 5, 1, 1, 1, 0, false, &anim, &animspeed);
 	//if sonic is facing left flip his animations
-	else if (PadHeld(PSP_CTRL_LEFT))	
+	else if (Pad_Held(PSP_CTRL_LEFT))	
 	{
 		PlayAnim(Sonic, runstart, 37, 1, 4, 6, 0, true, &anim, &animspeed);
 		sonicfacingright = false;
 	}
-	else if (sonicfacingright == false && !PadHeld(PSP_CTRL_RIGHT) && !PadHeld(PSP_CTRL_LEFT))
+	else if (sonicfacingright == false && !Pad_Held(PSP_CTRL_RIGHT) && !Pad_Held(PSP_CTRL_LEFT))
 		PlayAnim(Sonic, idle, 5 + 31, 1, 1, 1, 0, true, &anim, &animspeed);
 }

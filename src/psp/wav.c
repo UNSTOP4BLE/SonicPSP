@@ -174,7 +174,7 @@ static void wavout_snd_callback(void *_buf, int _reqn, void *pdata)
 	}
 }
 
-bool WavInit()
+bool Wav_Init()
 {
 	int i;
 
@@ -190,7 +190,7 @@ bool WavInit()
 	return(1);
 }
 
-void WavStop(Wav *theWav)
+void Wav_Stop(Wav *theWav)
 {
 	int i;
 	
@@ -201,7 +201,7 @@ void WavStop(Wav *theWav)
 	}
 }
 
-void WavStopAll()
+void Wav_StopAll()
 {
 	int i;
 	
@@ -209,12 +209,12 @@ void WavStopAll()
 		wavout_snd_playing[i] = 0;
 }
 
-void WavSetLoop(Wav *theWav, int loop)
+void Wav_SetLoop(Wav *theWav, int loop)
 {
 	theWav->loop = loop;
 }
 
-bool WavPlay(Wav *theWav)
+bool Wav_Play(Wav *theWav)
 {
 	int i;
 	Wav *wid;
@@ -262,12 +262,11 @@ inline unsigned long readU32(char* file, unsigned long addr )
 	return (unsigned long)((file[addr]) | (file[addr+1]<<8) | (file[addr+2]<<16) | (file[addr+3]<<24));
 }
 
-Wav *WavLoad(const char *filename)
+Wav *Wav_Load(const char *filename)
 {
 	int filelen;
 	unsigned long channels;
 	unsigned long samplerate;
-	unsigned long blocksize;
 	unsigned long bitpersample;
 	unsigned long datalength;
 	unsigned long samplecount;
@@ -306,7 +305,6 @@ Wav *WavLoad(const char *filename)
 	
 	channels = *(signed short *)(wavfile + 0x16);
 	samplerate = *(unsigned long *)(wavfile + 0x18);
-	blocksize = *(signed short *)(wavfile + 0x20);
 	bitpersample = *(signed short *)(wavfile + 0x22);
 
 	int i;
@@ -370,7 +368,7 @@ Wav *WavLoad(const char *filename)
 	return theWav;
 }
 
-void Wavfree(Wav *theWav)
+void Wav_free(Wav *theWav)
 {
 	if (RefcountRelease( theWav )!=0) return;
 	if(theWav != NULL)

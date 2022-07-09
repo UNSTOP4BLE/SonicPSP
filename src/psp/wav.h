@@ -16,12 +16,12 @@ typedef struct
         unsigned long bitPerSample; /**<  The bit rate of the WAV */
 } Wav;
 
-bool WavInit();
-Wav *WavLoad(const char *filename);
-void WavFree(Wav *theWav);
-bool WavPlay(Wav *theWav);
-void WavStop(Wav *theWav);
-void WavStopAll();
-void WavSetLoop(Wav *theWav, int loop);
+bool Wav_Init();
+Wav *Wav_Load(const char *filename);
+void Wav_Free(Wav *theWav);
+bool Wav_Play(Wav *theWav);
+void Wav_Stop(Wav *theWav);
+void Wav_StopAll();
+void Wav_SetLoop(Wav *theWav, int loop);
 
 #endif 
