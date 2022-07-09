@@ -26,7 +26,7 @@ void InitAnim(g2dTexture* tex, AnimFrames Frames, int animx, int animy, bool fli
 void PlayAnim(g2dTexture* tex, AnimFrames Frames[], int animx, int animy, int animcooldown, int lastframe, int backframe, bool flipanim, int *anim, int *animspeed)
 {
 	if (*anim > lastframe - 1) // we do -1 cus the frames are a array
-		*anim = backframe;
+		*anim = (backframe - 1);
 	(*animspeed) ++;
 	if (*animspeed > animcooldown)
 	{

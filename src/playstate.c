@@ -9,6 +9,8 @@
 #include "char/sonic.h"
 #include "playstate.h"
 
+Game game;
+
 void Playstate() 
 {
    	Wav *jump = Wav_Load("assets/sfx/SCD_FM_02.wav"); 
@@ -17,7 +19,10 @@ void Playstate()
     while(1) 
     {
        	g2dClear(GREEN);
+
        	Pad_Update();
+
+       	game.gravity += 9;
 		Char_Sonic(Sonic);
 
 		if (Pad_Pressed(PSP_CTRL_CROSS))  
