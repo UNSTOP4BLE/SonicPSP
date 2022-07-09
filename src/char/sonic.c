@@ -7,6 +7,8 @@
 #include "../playstate.h"
 
 bool sonicfacingright = true;
+bool skidding;
+int skidtimer;
 static int anim, animspeed = 0;
 static float movespeed, playerx;
 /*
@@ -38,6 +40,12 @@ static AnimFrames lookup[3] =
 	{241, 1, 29, 38,  0, 1},
 	{241, 1, 29, 38,  0, 1},
 };
+static AnimFrames skid[3] = 
+{
+ 	{31, 341, 31, 36,  0, 1},
+	{64, 341, 31, 36,  0, 1},
+	{64, 341, 31, 36,  0, 1},
+};
 static AnimFrames runstart[7] = 
 {
  	{238, 42, 24, 37,  6, 0},
@@ -54,58 +62,87 @@ void Char_Sonic(g2dTexture* Sonic)
 	//dear god this sucks
 
 	//control sonics movement
-	if (sonicfacingright)
-		playerx += movespeed;
+	
+	if (!(Pad_Held(PSP_CTRL_LEFT) && Pad_Held(PSP_CTRL_RIGHT)))
+	{
+		if (sonicfacingright)
+			playerx += movespeed;
+		else
+			playerx -= movespeed;
+		if ((Pad_Held(PSP_CTRL_RIGHT) || Pad_Held(PSP_CTRL_LEFT)) && movespeed <= 6)	
+			movespeed += 0.2;
+		else if (movespeed > 0)
+			movespeed -= 0.3;
+
+		if (sonicfacingright && movespeed >= 1 && Pad_Held(PSP_CTRL_LEFT))
+		{
+			skidding = true;
+			skidtimer ++;
+			movespeed -= 4;
+		}
+		else if (!sonicfacingright && movespeed >= 1 && Pad_Held(PSP_CTRL_RIGHT))
+		{
+			skidding = true;
+			skidtimer ++;
+			movespeed -= 4;
+		}
+	
+		if (skidding)
+		{
+			if (sonicfacingright)
+				PlayAnim(Sonic, skid, 5 + playerx, game.gravity, 4, 2, 1, false, &anim, &animspeed);
+			else
+				PlayAnim(Sonic, skid, 5 + 31 + playerx, game.gravity, 4, 2, 1, true, &anim, &animspeed);
+		}
+	}
 	else
-		playerx -= movespeed;
-
-	if ((Pad_Held(PSP_CTRL_RIGHT) || Pad_Held(PSP_CTRL_LEFT)) && movespeed <= 6)	
-		movespeed += 0.2;
-	else if (movespeed > 0)
-		movespeed -= 0.3;
-
-	if (sonicfacingright && movespeed >= 0 && Pad_Held(PSP_CTRL_LEFT))
-		movespeed -= 4;
-	if (!sonicfacingright && movespeed >= 0 && Pad_Held(PSP_CTRL_RIGHT))
-		movespeed -= 4;
-
+		movespeed = 0;
+	if (skidtimer >= 4)
+	{
+		skidding = false;
+		skidtimer = 0;
+	}
 
 	if (movespeed <= 0)
 		movespeed = 0;
-	//if sonic is facing right keep his animations normal
-	if (Pad_Held(PSP_CTRL_RIGHT) && !Pad_Held(PSP_CTRL_LEFT))	
+	if (!skidding)
 	{
-		PlayAnim(Sonic, runstart, 1 + playerx, game.gravity, 4, 6, 1, false, &anim, &animspeed);
-		sonicfacingright = true;
-	}
-	else if (!Pad_Held(PSP_CTRL_LEFT) && !Pad_Held(PSP_CTRL_RIGHT) && movespeed != 0 && sonicfacingright)	
-	{
-		PlayAnim(Sonic, runstart, 1 + playerx, game.gravity, 8, 6, 1, false, &anim, &animspeed);
-	}
-	else if (Pad_Held(PSP_CTRL_UP) && sonicfacingright && movespeed <= 3)
-		PlayAnim(Sonic, lookup, 5 + playerx, game.gravity, 4, 2, 2, false, &anim, &animspeed);
-	else if (sonicfacingright && !Pad_Held(PSP_CTRL_RIGHT) && !Pad_Held(PSP_CTRL_LEFT) && movespeed == 0) 
-		PlayAnim(Sonic, idle, 5 + playerx, game.gravity, 1, 1, 1, false, &anim, &animspeed);
-	
+		skidtimer = 0;
+		//if sonic is facing right keep his animations normal
+		if (Pad_Held(PSP_CTRL_RIGHT) && !Pad_Held(PSP_CTRL_LEFT))	
+		{
+			PlayAnim(Sonic, runstart, 1 + playerx, game.gravity, 4, 6, 1, false, &anim, &animspeed);
+			sonicfacingright = true;
+		}
+		else if (!Pad_Held(PSP_CTRL_LEFT) && !Pad_Held(PSP_CTRL_RIGHT) && movespeed != 0 && sonicfacingright)	
+		{
+			PlayAnim(Sonic, runstart, 1 + playerx, game.gravity, 8, 6, 1, false, &anim, &animspeed);
+		}
+		else if (Pad_Held(PSP_CTRL_UP) && sonicfacingright && movespeed <= 3)
+			PlayAnim(Sonic, lookup, 5 + playerx, game.gravity, 4, 2, 2, false, &anim, &animspeed);
+		else if (sonicfacingright && !Pad_Held(PSP_CTRL_RIGHT) && !Pad_Held(PSP_CTRL_LEFT) && movespeed == 0) 
+			PlayAnim(Sonic, idle, 5 + playerx, game.gravity, 1, 1, 1, false, &anim, &animspeed);
+		
 
-	//if sonic is facing left flip his animations
-	else if (Pad_Held(PSP_CTRL_LEFT) && !Pad_Held(PSP_CTRL_RIGHT))	
-	{
-		PlayAnim(Sonic, runstart, 37 + playerx, game.gravity, 4, 6, 1, true, &anim, &animspeed);
-		sonicfacingright = false;
-	}
-	else if (!Pad_Held(PSP_CTRL_LEFT) && !Pad_Held(PSP_CTRL_RIGHT) && movespeed != 0 && !sonicfacingright)	
-	{
-		PlayAnim(Sonic, runstart, 37 + playerx, game.gravity, 8, 6, 1, true, &anim, &animspeed);
-	}
-	else if (Pad_Held(PSP_CTRL_UP) && !sonicfacingright && movespeed <= 3)
-		PlayAnim(Sonic, lookup, 5 + 31 + playerx, game.gravity, 4, 2, 2, true, &anim, &animspeed);
-	else if (sonicfacingright == false && !Pad_Held(PSP_CTRL_RIGHT) && !Pad_Held(PSP_CTRL_LEFT) && movespeed == 0)
-		PlayAnim(Sonic, idle, 5 + 31 + playerx, game.gravity, 1, 1, 1, true, &anim, &animspeed);
+		//if sonic is facing left flip his animations
+		else if (Pad_Held(PSP_CTRL_LEFT) && !Pad_Held(PSP_CTRL_RIGHT))	
+		{
+			PlayAnim(Sonic, runstart, 37 + playerx, game.gravity, 4, 6, 1, true, &anim, &animspeed);
+			sonicfacingright = false;
+		}
+		else if (!Pad_Held(PSP_CTRL_LEFT) && !Pad_Held(PSP_CTRL_RIGHT) && movespeed != 0 && !sonicfacingright)	
+		{
+			PlayAnim(Sonic, runstart, 37 + playerx, game.gravity, 8, 6, 1, true, &anim, &animspeed);
+		}
+		else if (Pad_Held(PSP_CTRL_UP) && !sonicfacingright && movespeed <= 3)
+			PlayAnim(Sonic, lookup, 5 + 31 + playerx, game.gravity, 4, 2, 2, true, &anim, &animspeed);
+		else if (sonicfacingright == false && !Pad_Held(PSP_CTRL_RIGHT) && !Pad_Held(PSP_CTRL_LEFT) && movespeed == 0)
+			PlayAnim(Sonic, idle, 5 + 31 + playerx, game.gravity, 1, 1, 1, true, &anim, &animspeed);
 
-	//dont break anims when left and right are pressed at the same time
-	if (Pad_Held(PSP_CTRL_LEFT) && Pad_Held(PSP_CTRL_RIGHT) && sonicfacingright)	
-		PlayAnim(Sonic, idle, 5 + playerx, game.gravity, 1, 1, 1, false, &anim, &animspeed);
-	if (Pad_Held(PSP_CTRL_LEFT) && Pad_Held(PSP_CTRL_RIGHT) && !sonicfacingright)	
-		PlayAnim(Sonic, idle, 5 + 31 + playerx, game.gravity, 1, 1, 1, true, &anim, &animspeed);
+		//dont break anims when left and right are pressed at the same time
+		if (Pad_Held(PSP_CTRL_LEFT) && Pad_Held(PSP_CTRL_RIGHT) && sonicfacingright)	
+			PlayAnim(Sonic, idle, 5 + playerx, game.gravity, 1, 1, 1, false, &anim, &animspeed);
+		if (Pad_Held(PSP_CTRL_LEFT) && Pad_Held(PSP_CTRL_RIGHT) && !sonicfacingright)	
+			PlayAnim(Sonic, idle, 5 + 31 + playerx, game.gravity, 1, 1, 1, true, &anim, &animspeed);
+	}
 }
