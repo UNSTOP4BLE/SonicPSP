@@ -18,10 +18,10 @@ void Playstate()
     {
        	g2dClear(GREEN);
 
-    	if (PadPressed(PSP_CTRL_CROSS))  
-        	WavPlay(jump);
-      	
 		Char_Sonic(Sonic);
+
+		if (PadPressed(PSP_CTRL_CROSS))  
+        	WavPlay(jump);
 
 		g2dFlip(G2D_VSYNC);
     }

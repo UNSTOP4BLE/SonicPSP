@@ -3,9 +3,6 @@
 #include "psp/glib2d.h"
 #include "animation.h"
 
-static int anim;
-static int animspeed;
-
 void InitAnim(g2dTexture* tex, AnimFrames Frames, int animx, int animy, bool flipanim)
 {
     g2dBeginRects(tex);
@@ -26,19 +23,19 @@ void InitAnim(g2dTexture* tex, AnimFrames Frames, int animx, int animy, bool fli
 	g2dEnd();
 }
 
-void PlayAnim(g2dTexture* tex, AnimFrames Frames[], int animx, int animy, int animcooldown, int lastframe, int backframe, bool flipanim)
+void PlayAnim(g2dTexture* tex, AnimFrames Frames[], int animx, int animy, int animcooldown, int lastframe, int backframe, bool flipanim, int *anim, int *animspeed)
 {
-	if (anim > lastframe - 1) // we do -1 cus the frames are a array
-		anim = backframe;
-	animspeed ++;
-	if (animspeed > animcooldown)
+	if (*anim > lastframe - 1) // we do -1 cus the frames are a array
+		*anim = backframe;
+	(*animspeed) ++;
+	if (*animspeed > animcooldown)
 	{
-		anim += 1;
-		animspeed = 0;
+		*anim += 1;
+		*animspeed = 0;
 	}
 
 	
-    InitAnim(tex, Frames[anim], animx, animy, flipanim);
+    InitAnim(tex, Frames[*anim], animx, animy, flipanim);
 }
 
 
