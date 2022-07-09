@@ -22,7 +22,7 @@ void Playstate()
 
        	Pad_Update();
 
-       	game.gravity += 9;
+     //   	game.gravity += 9;
 		Char_Sonic(Sonic);
 
 		if (Pad_Pressed(PSP_CTRL_CROSS))  
