@@ -1,1 +1,1 @@
-void Char_Sonic(g2dTexture* Sonic);
+void Char_Sonic(g2dTexture* Sonic, Wav *skidsound);

@@ -9,6 +9,8 @@
 #include "psp/callbacks.h"
 #include "playstate.h"
 
+Game game;
+
 PSP_MODULE_INFO("PSP GAME", 0, 1, 0);
 
 int main() 
