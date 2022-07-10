@@ -4,6 +4,7 @@
 
 typedef struct 
 {
+	int bgx;
 	float gravity;
 	float camx, camy;
 } Game;
