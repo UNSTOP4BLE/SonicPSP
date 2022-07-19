@@ -1386,4 +1386,15 @@ void g2dSetScissor(int x, int y, int w, int h)
     scissor = true;
 }
 
+void DrawG2DTex(g2dTexture* tex, Rect *Img, Rect *Disp)
+{
+	g2dBeginRects(tex);
+	g2dSetCropXY(Img->x, Img->y);
+	g2dSetCropWH(Img->w, Img->h);
+	g2dSetCoordXY(Disp->x, Disp->y);
+	g2dSetScaleWH(Disp->w, Disp->h);
+	g2dAdd();
+	g2dEnd();
+}
+
 // EOF

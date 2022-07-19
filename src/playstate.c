@@ -6,8 +6,13 @@
 #include "psp/glib2d.h"
 #include "psp/wav.h"
 #include "psp/pad.h"
+#include "psp/font.h"
 #include "char/sonic.h"
 #include "playstate.h"
+
+char debugmsg[1000];
+
+static int movebg;
 
 void DrawBg(g2dTexture* BG, int x, float camx);
 
@@ -17,47 +22,33 @@ void Playstate()
    	Wav *skid= Wav_Load("assets/sfx/SCD_FM_00.wav"); 
     g2dTexture* Sonic = g2dTexLoad("assets/sonicsheet.png",G2D_SWIZZLE);
     g2dTexture* BG = g2dTexLoad("assets/bg.png",G2D_SWIZZLE);
+    g2dTexture* FontTex = g2dTexLoad("assets/font.png",G2D_SWIZZLE);
 
     while(1) 
     {
-       	g2dClear(GREEN);
+       	sprintf(debugmsg, "bgx %d camx %f movebg %d", game.bgx, game.camx, movebg);
 
+       	g2dClear(GREEN);
        	Pad_Update();
 
        	//game.gravity += 9;
 
-       	if (game.bgx < SCREEN_WIDTH)
-       		Wav_Play(jump);
        	DrawBg(BG, game.bgx, game.camx / 2);
        	DrawBg(BG, game.bgx + 544 + 208, game.camx / 2);
-       	//1st back
-       	//2nd back
-    //   	Back_Disp.x = Back_Disp.x + 544 + 208 + 1;
-      //	DrawG2DTex(BG, &Back_img, &Back_Disp);
-//
-  //     	Back2_Disp.x = Back_Disp.x + 544;
-    //   	DrawG2DTex(BG, &Back2_img, &Back2_Disp);
-
-
-
+       
 		Char_Sonic(Sonic, skid);
 
 		if (Pad_Pressed(PSP_CTRL_CROSS))  
         	Wav_Play(jump);
 
+		if (Pad_Held(PSP_CTRL_LEFT))  
+        	movebg --;
+        else if (Pad_Held(PSP_CTRL_RIGHT))  
+        	movebg ++;
+
+        PrintMSG(FontTex, debugmsg, 0, 0);
 		g2dFlip(G2D_VSYNC);
     }
-}
-
-void DrawG2DTex(g2dTexture* tex, Rect *Img, Rect *Disp)
-{
-	g2dBeginRects(tex);
-	g2dSetCropXY(Img->x, Img->y);
-	g2dSetCropWH(Img->w, Img->h);
-	g2dSetCoordXY(Disp->x, Disp->y);
-	g2dSetScaleWH(Disp->w, Disp->h);
-	g2dAdd();
-	g2dEnd();
 }
 
 void DrawBg(g2dTexture* BG, int x, float camx)

@@ -9,13 +9,6 @@ typedef struct
 	float camx, camy;
 } Game;
 
-typedef struct 
-{
-	float x,y,w,h;
-} Rect;
-
-void DrawG2DTex(g2dTexture* tex, Rect *Img, Rect *Disp);
-
 extern Game game;
 
 void Playstate();

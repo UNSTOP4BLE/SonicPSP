@@ -19,7 +19,7 @@ int main()
 	Wav_Init();
 	Pad_Init();
     pspDebugScreenInit();
-  	
+  	g2dInit();
     Playstate();
     
 }

@@ -6,6 +6,7 @@ OBJS = src/main.o \
 	   src/psp/pad.o \
 	   src/psp/audio.o \
 	   src/psp/wav.o \
+	   src/psp/font.o \
 	   src/psp/glib2d.o 
 
 LIBS = -ljpeg -lpng -lz -lpspgum -lpspgu -lpsprtc -lm -lpspvram -lpspaudio -lpspmp3

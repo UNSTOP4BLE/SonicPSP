@@ -142,6 +142,11 @@ extern "C" {
              (int)(luminance) * G2D_GET_B(color) / 255, \
              (int)(alpha    ) * G2D_GET_A(color) / 255)
 
+typedef struct 
+{
+	float x,y,w,h;
+} Rect;
+
 /**
  * \enum g2dColors
  * \brief Colors enumeration.
@@ -809,6 +814,8 @@ void g2dResetScissor();
  * Pixel draw will be skipped outside this rectangle.
  */
 void g2dSetScissor(int x, int y, int w, int h);
+
+void DrawG2DTex(g2dTexture* tex, Rect *Img, Rect *Disp);
 
 #ifdef __cplusplus
 }
