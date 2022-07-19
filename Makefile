@@ -2,6 +2,7 @@ TARGET = PSPGAME
 OBJS = src/main.o \
 	   src/playstate.o \
 	   src/char/sonic.o \
+	   src/levels/leveltest.o \
 	   src/animation.o \
 	   src/psp/pad.o \
 	   src/psp/audio.o \
