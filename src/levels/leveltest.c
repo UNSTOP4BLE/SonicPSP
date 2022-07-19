@@ -16,7 +16,7 @@ static void DrawFloorPiece(g2dTexture* BG, int x, int y);
 void Level_TestInit() //this code will execute only once
 {
    	Wav *ghz = Wav_Load("assets/sfx/greenhill.wav"); 
-    Wav_SetLoop(ghz, 7);
+    Wav_SetLoop(ghz, 1);
     Wav_Play(ghz);
 }
 
@@ -24,8 +24,8 @@ void Level_TestUpdate(Wav *skidsfx, g2dTexture* Sonic, g2dTexture* BG, g2dTextur
 {
 	for (int i = 0; i < 10; i++) // spawn 10 backgrounds, its not a perfomance issue right????
     {
-    	DrawBg(BG, (544 + 208) * i, game.camx / 2);
-    	DrawFloorPiece(BG, 255 * i, 130);
+    	DrawBg(BG, (544 + 208) * i, game.camx / 5);
+    	DrawFloorPiece(BG, 256 * i, 130);
     }
 
 	Char_Sonic(Sonic, skidsfx); // spawns sonic
@@ -46,15 +46,15 @@ static void DrawBg(g2dTexture* BG, int x, float camx)
 
 static void DrawFloorPiece(g2dTexture* BG, int x, int y)
 {
-   	Rect Pattern_img = {255, 491, 256, 20};
-   	Rect Pattern_Disp = {x - game.camx, y + 48 - game.camy, 256, 20};
+   	Rect Pattern_img = {255, 487, 256, 16};
+   	Rect Pattern_Disp = {x - game.camx, (y + 64 - 24) - game.camy, 256, 16};
 
-   	Rect FloorP_img = {255, 443, 256, 68};
-   	Rect FloorP_Disp = {x - game.camx, y - game.camy, 256, 68};
+   	Rect FloorP_img = {255, 447, 256, 64};
+   	Rect FloorP_Disp = {x - game.camx, y - game.camy, 256, 64};
    	DrawG2DTex(BG, &FloorP_img, &FloorP_Disp);
    	for (int i = 0; i < 6; i++)	
 	{
-		Pattern_Disp.y *= i;
+		Pattern_Disp.y += 16;
    		DrawG2DTex(BG, &Pattern_img, &Pattern_Disp);
    	}
 }
