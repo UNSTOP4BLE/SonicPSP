@@ -24,7 +24,8 @@ void Level_TestUpdate(Wav *skidsfx, g2dTexture* Sonic, g2dTexture* BG, g2dTextur
 {
 	for (int i = 0; i < 10; i++) // spawn 10 backgrounds, its not a perfomance issue right????
     {
-    	DrawBg(BG, (544 + 208) * i, game.camx / 5);
+    	if (i <= 1) // spawn only 2 bg parts cus u wont see the others anyways
+    		DrawBg(BG, (544 + 208) * i, game.camx / 5);
     	DrawFloorPiece(BG, 256 * i, 130);
     }
 
