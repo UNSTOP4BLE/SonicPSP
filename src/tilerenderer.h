@@ -1,0 +1,1 @@
+void Render_NewTile(g2dTexture* tex, Rect Tile_img, int x, int y);

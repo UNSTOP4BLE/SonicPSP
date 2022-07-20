@@ -4,9 +4,9 @@
 
 typedef struct 
 {
-	int bgx;
 	float gravity;
 	float camx, camy;
+	bool colliding;
 } Game;
 
 extern Game game;

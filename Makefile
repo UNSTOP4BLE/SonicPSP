@@ -4,6 +4,7 @@ OBJS = src/main.o \
 	   src/char/sonic.o \
 	   src/levels/leveltest.o \
 	   src/animation.o \
+	   src/tilerenderer.o \
 	   src/psp/pad.o \
 	   src/psp/audio.o \
 	   src/psp/wav.o \
