@@ -111,9 +111,9 @@ void Char_Sonic(g2dTexture* Sonic, Wav *skidsound)
 			}
 
 			if (sonicfacingright)
-				PlayAnim(Sonic, skid, 5 + playerx + game.camx + SCREEN_WIDTH / 2 - 15, game.gravity + (SCREEN_HEIGHT / 2 - 36), 4, 2, 1, false, &anim, &animspeed);
+				PlayAnim(Sonic, skid, 5 + playerx + game.camx + SCREEN_WIDTH / 2 - 15, (SCREEN_HEIGHT / 2 - 36), 4, 2, 1, false, &anim, &animspeed);
 			else
-				PlayAnim(Sonic, skid, 5 + 31 + playerx + game.camx + SCREEN_WIDTH / 2 - 15, game.gravity + (SCREEN_HEIGHT / 2 - 36), 4, 2, 1, true, &anim, &animspeed);
+				PlayAnim(Sonic, skid, 5 + 31 + playerx + game.camx + SCREEN_WIDTH / 2 - 15, (SCREEN_HEIGHT / 2 - 36), 4, 2, 1, true, &anim, &animspeed);
 		}
 	}
 	else
@@ -132,41 +132,41 @@ void Char_Sonic(g2dTexture* Sonic, Wav *skidsound)
 		//if sonic is facing right keep his animations normal
 		if (Pad_Held(PSP_CTRL_RIGHT) && !Pad_Held(PSP_CTRL_LEFT) && movespeed < 4)	
 		{
-			PlayAnim(Sonic, runstart, 1 + playerx + game.camx + SCREEN_WIDTH / 2 - 15, game.gravity + (SCREEN_HEIGHT / 2 - 36), 4, 6, 1, false, &anim, &animspeed);
+			PlayAnim(Sonic, runstart, 1 + playerx + game.camx + SCREEN_WIDTH / 2 - 15, (SCREEN_HEIGHT / 2 - 36), 4, 6, 1, false, &anim, &animspeed);
 			sonicfacingright = true;
 		}
 		else if (Pad_Held(PSP_CTRL_RIGHT) && !Pad_Held(PSP_CTRL_LEFT) && movespeed >= 4 && movespeed < 7)
-			PlayAnim(Sonic, midsprint, 5 + playerx + game.camx + SCREEN_WIDTH / 2 - 15, game.gravity + (SCREEN_HEIGHT / 2 - 36), 3, 4, 1, false, &anim, &animspeed);
+			PlayAnim(Sonic, midsprint, 5 + playerx + game.camx + SCREEN_WIDTH / 2 - 15, (SCREEN_HEIGHT / 2 - 36), 3, 4, 1, false, &anim, &animspeed);
 		else if (Pad_Held(PSP_CTRL_RIGHT) && !Pad_Held(PSP_CTRL_LEFT) && movespeed >= 7)
-			PlayAnim(Sonic, fullsprint, playerx + game.camx + SCREEN_WIDTH / 2 - 15, game.gravity + (SCREEN_HEIGHT / 2 - 36), 4, 4, 1, false, &anim, &animspeed);
+			PlayAnim(Sonic, fullsprint, playerx + game.camx + SCREEN_WIDTH / 2 - 15, (SCREEN_HEIGHT / 2 - 36), 4, 4, 1, false, &anim, &animspeed);
 		else if (!Pad_Held(PSP_CTRL_LEFT) && !Pad_Held(PSP_CTRL_RIGHT) && movespeed != 0 && sonicfacingright)	
-			PlayAnim(Sonic, runstart, 1 + playerx + game.camx + SCREEN_WIDTH / 2 - 15, game.gravity + (SCREEN_HEIGHT / 2 - 36), 8, 6, 1, false, &anim, &animspeed);
+			PlayAnim(Sonic, runstart, 1 + playerx + game.camx + SCREEN_WIDTH / 2 - 15, (SCREEN_HEIGHT / 2 - 36), 8, 6, 1, false, &anim, &animspeed);
 		else if (Pad_Held(PSP_CTRL_UP) && sonicfacingright && movespeed <= 3)
-			PlayAnim(Sonic, lookup, 5 + playerx + game.camx + SCREEN_WIDTH / 2 - 15, game.gravity + (SCREEN_HEIGHT / 2 - 36), 4, 2, 2, false, &anim, &animspeed);
+			PlayAnim(Sonic, lookup, 5 + playerx + game.camx + SCREEN_WIDTH / 2 - 15, (SCREEN_HEIGHT / 2 - 36), 4, 2, 2, false, &anim, &animspeed);
 		else if (sonicfacingright && !Pad_Held(PSP_CTRL_RIGHT) && !Pad_Held(PSP_CTRL_LEFT) && movespeed == 0) 
-			PlayAnim(Sonic, idle, 5 + playerx + game.camx + SCREEN_WIDTH / 2 - 15, game.gravity + (SCREEN_HEIGHT / 2 - 36), 1, 1, 1, false, &anim, &animspeed);
+			PlayAnim(Sonic, idle, 5 + playerx + game.camx + SCREEN_WIDTH / 2 - 15, (SCREEN_HEIGHT / 2 - 36), 1, 1, 1, false, &anim, &animspeed);
 
 		//if sonic is facing left flip his animations
 		else if (Pad_Held(PSP_CTRL_LEFT) && !Pad_Held(PSP_CTRL_RIGHT) && movespeed < 4)	
 		{
-			PlayAnim(Sonic, runstart, 37 + playerx + game.camx + SCREEN_WIDTH / 2 - 15, game.gravity + (SCREEN_HEIGHT / 2 - 36), 4, 6, 1, true, &anim, &animspeed);
+			PlayAnim(Sonic, runstart, 37 + playerx + game.camx + SCREEN_WIDTH / 2 - 15, (SCREEN_HEIGHT / 2 - 36), 4, 6, 1, true, &anim, &animspeed);
 			sonicfacingright = false;
 		}
 		else if (Pad_Held(PSP_CTRL_LEFT) && !Pad_Held(PSP_CTRL_RIGHT) && movespeed >= 4 && movespeed < 7)
-			PlayAnim(Sonic, midsprint, 5 + 31 + playerx + game.camx + SCREEN_WIDTH / 2 - 15, game.gravity + (SCREEN_HEIGHT / 2 - 36), 3, 4, 1, true, &anim, &animspeed);
+			PlayAnim(Sonic, midsprint, 5 + 31 + playerx + game.camx + SCREEN_WIDTH / 2 - 15, (SCREEN_HEIGHT / 2 - 36), 3, 4, 1, true, &anim, &animspeed);
 		else if (Pad_Held(PSP_CTRL_LEFT) && !Pad_Held(PSP_CTRL_RIGHT) && movespeed >= 7)
-			PlayAnim(Sonic, fullsprint, 5 + 31 + playerx + game.camx + SCREEN_WIDTH / 2 - 15, game.gravity + (SCREEN_HEIGHT / 2 - 36), 4, 4, 1, true, &anim, &animspeed);
+			PlayAnim(Sonic, fullsprint, 5 + 31 + playerx + game.camx + SCREEN_WIDTH / 2 - 15, (SCREEN_HEIGHT / 2 - 36), 4, 4, 1, true, &anim, &animspeed);
 		else if (!Pad_Held(PSP_CTRL_LEFT) && !Pad_Held(PSP_CTRL_RIGHT) && movespeed != 0 && !sonicfacingright)	
-			PlayAnim(Sonic, runstart, 37 + playerx + game.camx + SCREEN_WIDTH / 2 - 15, game.gravity + (SCREEN_HEIGHT / 2 - 36), 8, 6, 1, true, &anim, &animspeed);
+			PlayAnim(Sonic, runstart, 37 + playerx + game.camx + SCREEN_WIDTH / 2 - 15, (SCREEN_HEIGHT / 2 - 36), 8, 6, 1, true, &anim, &animspeed);
 		else if (Pad_Held(PSP_CTRL_UP) && !sonicfacingright && movespeed <= 3)
-			PlayAnim(Sonic, lookup, 5 + 31 + playerx + game.camx + SCREEN_WIDTH / 2 - 15, game.gravity + (SCREEN_HEIGHT / 2 - 36), 4, 2, 2, true, &anim, &animspeed);
+			PlayAnim(Sonic, lookup, 5 + 31 + playerx + game.camx + SCREEN_WIDTH / 2 - 15, (SCREEN_HEIGHT / 2 - 36), 4, 2, 2, true, &anim, &animspeed);
 		else if (sonicfacingright == false && !Pad_Held(PSP_CTRL_RIGHT) && !Pad_Held(PSP_CTRL_LEFT) && movespeed == 0)
-			PlayAnim(Sonic, idle, 5 + 31 + playerx + game.camx + SCREEN_WIDTH / 2 - 15, game.gravity + (SCREEN_HEIGHT / 2 - 36), 1, 1, 1, true, &anim, &animspeed);
+			PlayAnim(Sonic, idle, 5 + 31 + playerx + game.camx + SCREEN_WIDTH / 2 - 15, (SCREEN_HEIGHT / 2 - 36), 1, 1, 1, true, &anim, &animspeed);
 
 		//dont break anims when left and right are pressed at the same time
 		if (Pad_Held(PSP_CTRL_LEFT) && Pad_Held(PSP_CTRL_RIGHT) && sonicfacingright)	
-			PlayAnim(Sonic, idle, 5 + playerx + game.camx + SCREEN_WIDTH / 2 - 15, game.gravity + (SCREEN_HEIGHT / 2 - 36), 1, 1, 1, false, &anim, &animspeed);
+			PlayAnim(Sonic, idle, 5 + playerx + game.camx + SCREEN_WIDTH / 2 - 15, (SCREEN_HEIGHT / 2 - 36), 1, 1, 1, false, &anim, &animspeed);
 		if (Pad_Held(PSP_CTRL_LEFT) && Pad_Held(PSP_CTRL_RIGHT) && !sonicfacingright)	
-			PlayAnim(Sonic, idle, 5 + 31 + playerx + game.camx + SCREEN_WIDTH / 2 - 15, game.gravity + (SCREEN_HEIGHT / 2 - 36), 1, 1, 1, true, &anim, &animspeed);
+			PlayAnim(Sonic, idle, 5 + 31 + playerx + game.camx + SCREEN_WIDTH / 2 - 15, (SCREEN_HEIGHT / 2 - 36), 1, 1, 1, true, &anim, &animspeed);
 	}
 }

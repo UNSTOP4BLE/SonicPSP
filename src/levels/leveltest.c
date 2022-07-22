@@ -31,6 +31,10 @@ void Level_TestUpdate(Wav *skidsfx, g2dTexture* Sonic, g2dTexture* BG, g2dTextur
 
 	Char_Sonic(Sonic, skidsfx); // spawns sonic
 
+   	Rect a_img = {1, 0, 510, 240};
+   	Rect a_Disp = {Playerx, Playery, Playerw, Playerh};
+   	DrawG2DTex(BG, &a_img, &a_Disp);
+
 	sprintf(debugmsg, "camx %f, coll %d", game.camx, game.colliding);
     PrintMSG(FontTex, debugmsg, 0, 0);
 }
@@ -59,10 +63,11 @@ static void DrawFloorPiece(g2dTexture* BG, int x, int y)
 		Pattern_Disp.y += 16;
    		DrawG2DTex(BG, &Pattern_img, &Pattern_Disp);
    	}
-   	if (game.camx + SCREEN_WIDTH / 2 - 15 >= FloorP_Disp.x && 
-		game.camy + (SCREEN_HEIGHT / 2 - 36) >= FloorP_Disp.y && 
-		game.camx + SCREEN_WIDTH / 2 - 15 + 40 <= FloorP_Disp.w && 
-		game.camy + (SCREEN_HEIGHT / 2 - 36) + 40 <= FloorP_Disp.h)
+
+   	if (Playerx >= FloorP_Disp.x && 
+		Playery >= FloorP_Disp.y && 
+		Playerx + Playerw <= FloorP_Disp.w && 
+		Playery + Playerh <= FloorP_Disp.h)
 		game.colliding = true;
 	else
 		game.colliding = false;

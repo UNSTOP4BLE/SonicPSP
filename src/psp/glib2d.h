@@ -81,6 +81,8 @@ extern "C" {
  */
 #define USE_PNG
 #define USE_JPEG
+#define SCREEN_WIDTH 480
+#define SCREEN_HEIGHT 272
 //#define USE_VFPU
 
 /**
