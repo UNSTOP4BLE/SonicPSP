@@ -27,8 +27,8 @@ void Playstate()
        	g2dClear(GREEN);
        	Pad_Update();
 
- //      	if (!game.colliding)
-       	//	game.gravity += 9;
+     //  	if (!game.colliding)
+    //		game.gravity += 1;
 
        	Level_TestUpdate(skidsfx, Sonic, BG, FontTex);
 
