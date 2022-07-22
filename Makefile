@@ -1,4 +1,4 @@
-TARGET = PSPGAME
+TARGET = SonicPSP
 OBJS = src/main.o \
 	   src/playstate.o \
 	   src/char/sonic.o \
@@ -22,7 +22,7 @@ PSP_FW_VERSION = 500
 PSP_LARGE_MEMORY = 1
 
 EXTRA_TARGETS = EBOOT.PBP
-PSP_EBOOT_TITLE = PSP GAME
+PSP_EBOOT_TITLE = SonicPSP
 PSP_EBOOT_ICON = ICON0.png
 PSP_EBOOT_PIC1 = PIC1.png
 

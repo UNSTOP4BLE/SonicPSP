@@ -11,7 +11,7 @@
 
 Game game;
 
-PSP_MODULE_INFO("PSP GAME", 0, 1, 0);
+PSP_MODULE_INFO("SonicPSP", 0, 1, 0);
 
 int main() 
 {
@@ -20,6 +20,6 @@ int main()
 	Pad_Init();
     pspDebugScreenInit();
   	g2dInit();
+  	
     Playstate();
-    
 }
