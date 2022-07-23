@@ -5,6 +5,7 @@
 #include "../psp/wav.h"
 #include "../psp/pad.h"
 #include "../psp/font.h"
+#include "../tilerenderer.h"
 
 #include "leveltest.h"
 #include "../char/sonic.h"
@@ -29,12 +30,12 @@ void Level_TestUpdate(Wav *skidsfx, g2dTexture* Sonic, g2dTexture* BG, g2dTextur
     	DrawFloorPiece(BG, 256 * i, 130);
     }
 
+    Rect a_img = {1, 0, 510, 240};
+    Render_NewTile(BG, a_img, 2, 1);
+    Render_NewTile(BG, a_img, 3, 1);
 	Char_Sonic(Sonic, skidsfx); // spawns sonic
 
-   	//Rect a_img = {1, 0, 510, 240};
- //  	Rect a_Disp = {Playerx, Playery, Playerw, Playerh};
-   //	DrawG2DTex(BG, &a_img, &a_Disp);
-
+	sprintf(debugmsg, "camx %f, coll %d", game.camx, game.colliding);
     PrintMSG(FontTex, debugmsg, 0, 0);
 }
 
@@ -50,31 +51,6 @@ static void DrawBg(g2dTexture* BG, int x, float camx)
 
 static void DrawFloorPiece(g2dTexture* BG, int x, int y)
 {
-   	Rect Pattern_img = {255, 487, 256, 16};
-   	Rect Pattern_Disp = {x - game.camx, (y + 64 - 24) - game.camy, 256, 16};
-
-   	Rect FloorP_img = {255, 447, 256, 64};
-   	Rect FloorP_Disp = {x - game.camx, y - game.camy, 256, 64};
-
-   	DrawG2DTex(BG, &FloorP_img, &FloorP_Disp);
-
-   	if (Playery + Playerh >= FloorP_Disp.y &&
-   		Playerx <= FloorP_Disp.x + FloorP_Disp.w && 
-   		Playerx + Playerw >= 0 - game.camx)
-   	{
-   		game.canjump = true;
-        game.colliding = true;
-   	}
-    else
-        game.colliding = false;
-
-   	for (int i = 0; i < 6; i++)	
-	{
-		Pattern_Disp.y += 16;
-   		DrawG2DTex(BG, &Pattern_img, &Pattern_Disp);
-   	}
-
-	sprintf(debugmsg, "camx %f, coll %d x %f y %f w %f, h %f", game.camx, game.colliding, FloorP_Disp.x, FloorP_Disp.y ,FloorP_Disp.w, FloorP_Disp.h );
 
 }
 

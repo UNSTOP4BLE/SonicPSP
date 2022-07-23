@@ -2,21 +2,22 @@
 #include "psp/font.h"
 #include "psp/glib2d.h"
 
-
-#include <stdio.h>            
-char damsg[10];
 void Render_NewTile(g2dTexture* tex, Rect Tile_img, int x, int y)
 {
-	Rect Tile_Disp = {x * 256, y * 256, Tile_img.w, Tile_img.h};
+	Rect Tile_Disp = {(x * 256) - game.camx, (y * 256) - game.camy, Tile_img.w, Tile_img.h};
 
-	if (game.camx >= Tile_Disp.x && 
-		game.camy >= Tile_Disp.y && 
-		game.camx + 40 <= Tile_Disp.w && 
-		game.camy + 40 <= Tile_Disp.h)
+	if (Playerx + Playerw >= Tile_Disp.x && 
+		Playery + Playerh >= Tile_Disp.y && 
+		Playerx <= Tile_Disp.x + Tile_Disp.w && 
+		Playery <= Tile_Disp.y + Tile_Disp.h)
+	{
 		game.colliding = true;
-	else
+		game.canjump = true;
+	}
+	else 
+	{
 		game.colliding = false;
-	sprintf(damsg, "collidg %d", game.colliding);
-	PrintMSG(g2dTexLoad("assets/font.png",G2D_SWIZZLE), damsg, 0, 11);
+		game.canjump = false;
+	}
 	DrawG2DTex(tex, &Tile_img, &Tile_Disp);
 }

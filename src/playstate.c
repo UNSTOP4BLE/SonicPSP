@@ -25,12 +25,9 @@ void Playstate()
     Level_TestInit();
 
     while(1) 
-    {
+    {	
        	g2dClear(GREEN);
        	Pad_Update();
-
-      	if (!game.colliding)
-    		game.gravity += 9;
 
        	Level_TestUpdate(skidsfx, Sonic, BG, FontTex);
 
@@ -54,6 +51,10 @@ void Playstate()
 	   	}
 	    else
 	    	jumpcooldown = 0;
+
+
+    	if (game.colliding == false && Pad_Pressed(PSP_CTRL_CIRCLE))
+    		game.gravity += 9;
 
 		g2dFlip(G2D_VSYNC);
     }
