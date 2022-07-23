@@ -66,18 +66,18 @@ void Char_Sonic(g2dTexture* Sonic, Wav *skidsound)
 		game.camx -= movespeed;	
 	game.camy = game.gravity;
 
-//	if (game.camx < 0)
-//		game.camx = 0;
+	if (game.camx < 0)
+		game.camx = 0;
 	//control sonics movement
 	if (!(Pad_Held(PSP_CTRL_LEFT) && Pad_Held(PSP_CTRL_RIGHT)))
 	{
-	//	if (game.camx > 0)
-	//	{
+		if (game.camx > 0)
+		{
 			if (sonicfacingright)
 				playerx -= movespeed;
 			else
 				playerx += movespeed;
-	//	}
+		}
 	
 		if ((Pad_Held(PSP_CTRL_RIGHT) || Pad_Held(PSP_CTRL_LEFT)) && movespeed <= 8)	
 		{	

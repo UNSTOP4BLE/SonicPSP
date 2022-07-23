@@ -31,9 +31,9 @@ void Level_TestUpdate(Wav *skidsfx, g2dTexture* Sonic, g2dTexture* BG, g2dTextur
 
 	Char_Sonic(Sonic, skidsfx); // spawns sonic
 
-   	Rect a_img = {1, 0, 510, 240};
-   	Rect a_Disp = {Playerx, Playery, Playerw, Playerh};
-   	DrawG2DTex(BG, &a_img, &a_Disp);
+   	//Rect a_img = {1, 0, 510, 240};
+ //  	Rect a_Disp = {Playerx, Playery, Playerw, Playerh};
+   //	DrawG2DTex(BG, &a_img, &a_Disp);
 
     PrintMSG(FontTex, debugmsg, 0, 0);
 }
@@ -59,8 +59,12 @@ static void DrawFloorPiece(g2dTexture* BG, int x, int y)
    	DrawG2DTex(BG, &FloorP_img, &FloorP_Disp);
 
    	if (Playery + Playerh >= FloorP_Disp.y &&
-   		Playerx <= FloorP_Disp.x + FloorP_Disp.w)
+   		Playerx <= FloorP_Disp.x + FloorP_Disp.w && 
+   		Playerx + Playerw >= 0 - game.camx)
+   	{
+   		game.canjump = true;
         game.colliding = true;
+   	}
     else
         game.colliding = false;
 

@@ -9,7 +9,7 @@ typedef struct
 {
 	float gravity;
 	float camx, camy;
-	bool colliding;
+	bool colliding, canjump;
 } Game;
 
 extern Game game;
